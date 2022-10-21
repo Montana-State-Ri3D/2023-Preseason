@@ -45,6 +45,7 @@ public class TestRun extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    subsystem.setPower(0);
   }
 
   // Returns true when the command should end.

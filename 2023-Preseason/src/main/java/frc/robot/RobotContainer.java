@@ -25,23 +25,29 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
   // Creating Subsystems
-  private final TestMotor TestSubsystem = new TestMotor(TEST_MOTOR_CAN_ID);
+  private TestMotor TestSubsystem;
 
   // Creating Commands
-  private final TestRun TestCommand;
+  private TestRun TestCommand;
 
   // Creating Controlers
   private final XboxController driveController = new XboxController(Constants.DRIVE_CONTROLLER_PORT);
-
-  // private final TestRun m_autoCommand = new TestRun(m_exampleSubsystem);
+  private final XboxController operatorController = new XboxController(Constants.OPERATOR_CONTROLLER_PORT);
+  private final XboxController testController = new XboxController(Constants.TEST_CONTROLLER_PORT);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    // Configure the button bindings
-    configureButtonBindings();
+    createSubsystems(); // Create our subsystems.
+    createCommands(); // Create our commands
+    configureButtonBindings(); // Configure the button bindings
+  }
+  private void createSubsystems(){
+  TestSubsystem = new TestMotor(TEST_MOTOR_CAN_ID);
+  }
 
+  private void createCommands(){
     TestCommand = new TestRun(TestSubsystem, () -> driveController.getLeftY());
     TestSubsystem.setDefaultCommand(TestCommand);
   }

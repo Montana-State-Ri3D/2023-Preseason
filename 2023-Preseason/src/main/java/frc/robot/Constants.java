@@ -18,6 +18,8 @@ public final class Constants {
 	public static final int OPERATOR_CONTROLLER_PORT = 1;
 	public static final int TEST_CONTROLLER_PORT = 2;
 
+    public static final boolean LOG = true;
+
     // CAN IDs for our motor controllers
     public static final int TEST_MOTOR_CAN_ID = 1;  
 }
