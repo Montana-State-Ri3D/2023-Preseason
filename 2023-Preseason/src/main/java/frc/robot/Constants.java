@@ -21,5 +21,12 @@ public final class Constants {
     public static final boolean LOG = true;
 
     // CAN IDs for our motor controllers
-    public static final int TEST_MOTOR_CAN_ID = 1;  
+    public static final int TEST_MOTOR_CAN_ID = 1;
+
+    // Drive Motors
+    public static final int LEFT_FRONT_MOTOR = 4;
+    public static final int LEFT_BACK_MOTOR = 5;
+    public static final int RIGHT_FRONT_MOTOR = 6;
+    public static final int RIGHT_BACKMOTOR = 7;
+    
 }

@@ -6,7 +6,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.DriveCommand;
 import frc.robot.commands.TestRun;
+import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.TestMotor;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -25,15 +27,17 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
   // Creating Subsystems
-  private TestMotor TestSubsystem;
+  private TestMotor testSubsystem;
+  private DriveTrainSubsystem driveTrainSubsystem;
 
   // Creating Commands
-  private TestRun TestCommand;
+  private TestRun testCommand;
+  private DriveCommand driveCommand;
 
   // Creating Controlers
   private final XboxController driveController = new XboxController(Constants.DRIVE_CONTROLLER_PORT);
   private final XboxController operatorController = new XboxController(Constants.OPERATOR_CONTROLLER_PORT);
-  private final XboxController testController = new XboxController(Constants.TEST_CONTROLLER_PORT);
+  //private final XboxController testController = new XboxController(Constants.TEST_CONTROLLER_PORT);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -43,13 +47,20 @@ public class RobotContainer {
     createCommands(); // Create our commands
     configureButtonBindings(); // Configure the button bindings
   }
-  private void createSubsystems(){
-  TestSubsystem = new TestMotor(TEST_MOTOR_CAN_ID);
+
+  private void createSubsystems() {
+    testSubsystem = new TestMotor(TEST_MOTOR_CAN_ID);
+    driveTrainSubsystem = new DriveTrainSubsystem(LEFT_FRONT_MOTOR, LEFT_BACK_MOTOR, RIGHT_FRONT_MOTOR,
+        RIGHT_FRONT_MOTOR);
   }
 
-  private void createCommands(){
-    TestCommand = new TestRun(TestSubsystem, () -> driveController.getLeftY());
-    TestSubsystem.setDefaultCommand(TestCommand);
+  private void createCommands() {
+    testCommand = new TestRun(testSubsystem, () -> operatorController.getLeftY());
+    driveCommand = new DriveCommand(driveTrainSubsystem, () -> driveController.getLeftY(),
+        () -> driveController.getRightX());
+
+    testSubsystem.setDefaultCommand(testCommand);
+    driveTrainSubsystem.setDefaultCommand(driveCommand);
   }
 
   /**
