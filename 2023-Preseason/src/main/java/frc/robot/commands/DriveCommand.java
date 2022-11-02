@@ -8,10 +8,11 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import java.util.function.DoubleSupplier;
+import frc.robot.Joystick;
+
+//import Controller.Joystick;
 
 import frc.robot.subsystems.DriveTrainSubsystem;
-
-import frc.robot.CommonLibrary;
 
 public class DriveCommand extends CommandBase {
   /** Creates a new DriveCommand. */
@@ -37,8 +38,8 @@ public class DriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    wheelSpeeds = DifferentialDrive.arcadeDriveIK(CommonLibrary.JoystickInput(xSpeed.getAsDouble()),
-        CommonLibrary.JoystickInput(zRotation.getAsDouble()), false);
+    wheelSpeeds = DifferentialDrive.arcadeDriveIK(Joystick.JoystickInput(xSpeed.getAsDouble()),
+        -Joystick.JoystickInput(zRotation.getAsDouble()), false);
     subsystem.drive(wheelSpeeds.left, wheelSpeeds.right);
   }
 

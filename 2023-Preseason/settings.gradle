@@ -23,5 +23,5 @@ pluginManagement {
             name 'frcHome'
             url frcHomeMaven
         }
-    }
+}
 }

@@ -27,11 +27,11 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
   // Creating Subsystems
-  private TestMotor testSubsystem;
+  //private TestMotor testSubsystem;
   private DriveTrainSubsystem driveTrainSubsystem;
 
   // Creating Commands
-  private TestRun testCommand;
+  //private TestRun testCommand;
   private DriveCommand driveCommand;
 
   // Creating Controlers
@@ -49,17 +49,17 @@ public class RobotContainer {
   }
 
   private void createSubsystems() {
-    testSubsystem = new TestMotor(TEST_MOTOR_CAN_ID);
+    //testSubsystem = new TestMotor(TEST_MOTOR_CAN_ID);
     driveTrainSubsystem = new DriveTrainSubsystem(LEFT_FRONT_MOTOR, LEFT_BACK_MOTOR, RIGHT_FRONT_MOTOR,
-        RIGHT_FRONT_MOTOR);
+        RIGHT_BACK_MOTOR);
   }
 
   private void createCommands() {
-    testCommand = new TestRun(testSubsystem, () -> operatorController.getLeftY());
+    //testCommand = new TestRun(testSubsystem, () -> operatorController.getLeftY());
     driveCommand = new DriveCommand(driveTrainSubsystem, () -> driveController.getLeftY(),
         () -> driveController.getRightX());
 
-    testSubsystem.setDefaultCommand(testCommand);
+    //testSubsystem.setDefaultCommand(testCommand);
     driveTrainSubsystem.setDefaultCommand(driveCommand);
   }
 

@@ -32,7 +32,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private TalonSRX rightMotor_1;
   private TalonSRX rightMotor_2;
 
-  //
+  
   public DriveTrainSubsystem(int IDleftMotor_1, int IDleftMotor_2, int IDrightMotor_1, int IDrightMotor_2) {
     leftMotor_1 = new TalonSRX(IDleftMotor_1);
     leftMotor_2 = new TalonSRX(IDleftMotor_2);
@@ -55,7 +55,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     rightMotor_2.setNeutralMode(NeutralMode.Coast);
 
     leftMotor_1.setInverted(true);
-    rightMotor_2.setInverted(true);
+    leftMotor_2.setInverted(true);
 
     leftMotor_2.follow(leftMotor_1);
     rightMotor_2.follow(rightMotor_1);
