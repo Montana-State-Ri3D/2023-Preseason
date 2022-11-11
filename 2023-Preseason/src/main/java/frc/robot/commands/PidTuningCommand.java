@@ -4,26 +4,22 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.TestMotor;
-
-import java.util.function.DoubleSupplier;
+import frc.robot.subsystems.TestMotorSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class TestRun extends CommandBase {
+public class PidTuningCommand extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
-  private final TestMotor subsystem;
-  private final DoubleSupplier powerSupplier;
+  private final TestMotorSubsystem subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TestRun(TestMotor subsystem, DoubleSupplier powerSupplier) {
+  public PidTuningCommand(TestMotorSubsystem subsystem) {
     this.subsystem = subsystem;
-    this.powerSupplier = powerSupplier;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -39,7 +35,7 @@ public class TestRun extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    subsystem.setPower(powerSupplier.getAsDouble());
+    subsystem.updatePID();
   }
 
   // Called once the command ends or is interrupted.

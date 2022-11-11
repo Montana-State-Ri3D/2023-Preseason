@@ -7,9 +7,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.TestRun;
+import frc.robot.commands.PidTuningCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.subsystems.TestMotor;
+import frc.robot.subsystems.TestMotorSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import static frc.robot.Constants.*;
@@ -27,12 +27,12 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
   // Creating Subsystems
-  //private TestMotor testSubsystem;
-  private DriveTrainSubsystem driveTrainSubsystem;
+  private  TestMotorSubsystem testMotorSubsystem;
+  //private DriveTrainSubsystem driveTrainSubsystem;
 
   // Creating Commands
-  //private TestRun testCommand;
-  private DriveCommand driveCommand;
+  private PidTuningCommand pidTuningCommand;
+  //private DriveCommand driveCommand;
 
   // Creating Controlers
   private final XboxController driveController = new XboxController(Constants.DRIVE_CONTROLLER_PORT);
@@ -49,18 +49,16 @@ public class RobotContainer {
   }
 
   private void createSubsystems() {
-    //testSubsystem = new TestMotor(TEST_MOTOR_CAN_ID);
-    driveTrainSubsystem = new DriveTrainSubsystem(LEFT_FRONT_MOTOR, LEFT_BACK_MOTOR, RIGHT_FRONT_MOTOR,
-        RIGHT_BACK_MOTOR);
+    testMotorSubsystem = new TestMotorSubsystem(TEST_MOTOR_CAN_ID);
+    //driveTrainSubsystem = new DriveTrainSubsystem(LEFT_FRONT_MOTOR, LEFT_BACK_MOTOR, RIGHT_FRONT_MOTOR,RIGHT_BACK_MOTOR);
   }
 
   private void createCommands() {
-    //testCommand = new TestRun(testSubsystem, () -> operatorController.getLeftY());
-    driveCommand = new DriveCommand(driveTrainSubsystem, () -> driveController.getLeftY(),
-        () -> driveController.getRightX());
+    pidTuningCommand = new PidTuningCommand(testMotorSubsystem);
+    //driveCommand = new DriveCommand(driveTrainSubsystem, () -> driveController.getLeftY(),() -> driveController.getRightX());
 
-    //testSubsystem.setDefaultCommand(testCommand);
-    driveTrainSubsystem.setDefaultCommand(driveCommand);
+    testMotorSubsystem.setDefaultCommand(pidTuningCommand);
+    //driveTrainSubsystem.setDefaultCommand(driveCommand);
   }
 
   /**

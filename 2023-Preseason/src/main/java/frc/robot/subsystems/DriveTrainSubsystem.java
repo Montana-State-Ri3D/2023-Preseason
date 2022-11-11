@@ -6,12 +6,15 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import java.util.Map;
+
 //TalonSRX
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 //Shuffleboard
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -20,19 +23,18 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 public class DriveTrainSubsystem extends SubsystemBase {
   /** Creates a new DriveTrainSubsystem. */
 
-  //Creating the Tab in Shuffleboard
+  // Creating the Tab in Shuffleboard
   private final ShuffleboardTab tab = Shuffleboard.getTab("DriveBase");
 
-  //Declaring the PowerDraw NetworkTable Entry
+  // Declaring the PowerDraw NetworkTable Entry
   private final NetworkTableEntry PowerDraw;
 
-  //Declaring the motor controler Member variable
+  // Declaring the motor controler Member variable
   private TalonSRX leftMotor_1;
   private TalonSRX leftMotor_2;
   private TalonSRX rightMotor_1;
   private TalonSRX rightMotor_2;
 
-  
   public DriveTrainSubsystem(int IDleftMotor_1, int IDleftMotor_2, int IDrightMotor_1, int IDrightMotor_2) {
     leftMotor_1 = new TalonSRX(IDleftMotor_1);
     leftMotor_2 = new TalonSRX(IDleftMotor_2);
@@ -64,6 +66,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
     PowerDraw = tab.add("Curent Power Draw of Full Drive Base", 0)
         .withPosition(0, 0)
         .withSize(3, 2)
+        .withProperties(Map.of("min", 0, "max", 100))
+        .withWidget(BuiltInWidgets.kGraph)
         .getEntry();
   }
 
@@ -73,7 +77,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
     PowerDraw.setNumber(leftMotor_1.getSupplyCurrent() + leftMotor_2.getSupplyCurrent()
         + rightMotor_1.getSupplyCurrent() + rightMotor_2.getSupplyCurrent());
   }
-  public void drive(double leftPower, double rightPower){
+
+  public void drive(double leftPower, double rightPower) {
     leftMotor_1.set(TalonSRXControlMode.PercentOutput, leftPower);
     rightMotor_1.set(TalonSRXControlMode.PercentOutput, rightPower);
   }
