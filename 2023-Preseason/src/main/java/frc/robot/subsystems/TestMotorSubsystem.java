@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 //Shuffleboard
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.GenericEntry;
 
 public class TestMotorSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
@@ -34,11 +34,11 @@ public class TestMotorSubsystem extends SubsystemBase {
 
   private final ShuffleboardTab tab = Shuffleboard.getTab("PID Tuning");
 
-  private final NetworkTableEntry RPM;
-  private final NetworkTableEntry PowerDraw;
-  private final NetworkTableEntry AppliedPower;
+  private final GenericEntry  RPM;
+  private final GenericEntry  PowerDraw;
+  private final GenericEntry  AppliedPower;
 
-  private NetworkTableEntry SetPoint, kP, kI, kD, kIz, kFF;
+  private GenericEntry  SetPoint, kP, kI, kD, kIz, kFF;
 
   public double kMaxOutput, kMinOutput, maxRPM, maxVel, minVel, maxAcc, allowedErr;
 
@@ -127,9 +127,9 @@ public class TestMotorSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    RPM.setNumber(encoder.getVelocity());
-    PowerDraw.setNumber(motor.getOutputCurrent());
-    AppliedPower.setNumber(motor.getAppliedOutput());
+    RPM.setDouble(encoder.getVelocity());
+    PowerDraw.setDouble(motor.getOutputCurrent());
+    AppliedPower.setDouble(motor.getAppliedOutput());
 
   }
 

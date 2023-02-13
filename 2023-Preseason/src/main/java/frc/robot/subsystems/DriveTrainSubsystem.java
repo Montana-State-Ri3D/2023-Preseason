@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 //Shuffleboard
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.GenericEntry;
 
 public class DriveTrainSubsystem extends SubsystemBase {
   /** Creates a new DriveTrainSubsystem. */
@@ -27,7 +27,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private final ShuffleboardTab tab = Shuffleboard.getTab("DriveBase");
 
   // Declaring the PowerDraw NetworkTable Entry
-  private final NetworkTableEntry PowerDraw;
+  private final GenericEntry PowerDraw;
 
   // Declaring the motor controler Member variable
   private TalonSRX leftMotor_1;
@@ -74,7 +74,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    PowerDraw.setNumber(leftMotor_1.getSupplyCurrent() + leftMotor_2.getSupplyCurrent()
+    PowerDraw.setDouble(leftMotor_1.getSupplyCurrent() + leftMotor_2.getSupplyCurrent()
         + rightMotor_1.getSupplyCurrent() + rightMotor_2.getSupplyCurrent());
   }
 

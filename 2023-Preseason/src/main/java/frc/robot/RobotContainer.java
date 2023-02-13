@@ -27,12 +27,12 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
   // Creating Subsystems
-  private  TestMotorSubsystem testMotorSubsystem;
-  //private DriveTrainSubsystem driveTrainSubsystem;
+  //private  TestMotorSubsystem testMotorSubsystem;
+  private DriveTrainSubsystem driveTrainSubsystem;
 
   // Creating Commands
-  private PidTuningCommand pidTuningCommand;
-  //private DriveCommand driveCommand;
+  //private PidTuningCommand pidTuningCommand;
+  private DriveCommand driveCommand;
 
   // Creating Controlers
   private final XboxController driveController = new XboxController(Constants.DRIVE_CONTROLLER_PORT);
@@ -49,16 +49,16 @@ public class RobotContainer {
   }
 
   private void createSubsystems() {
-    testMotorSubsystem = new TestMotorSubsystem(TEST_MOTOR_CAN_ID);
-    //driveTrainSubsystem = new DriveTrainSubsystem(LEFT_FRONT_MOTOR, LEFT_BACK_MOTOR, RIGHT_FRONT_MOTOR,RIGHT_BACK_MOTOR);
+    //testMotorSubsystem = new TestMotorSubsystem(TEST_MOTOR_CAN_ID);
+    driveTrainSubsystem = new DriveTrainSubsystem(LEFT_FRONT_MOTOR, LEFT_BACK_MOTOR, RIGHT_FRONT_MOTOR,RIGHT_BACK_MOTOR);
   }
 
   private void createCommands() {
-    pidTuningCommand = new PidTuningCommand(testMotorSubsystem);
-    //driveCommand = new DriveCommand(driveTrainSubsystem, () -> driveController.getLeftY(),() -> driveController.getRightX());
+    //pidTuningCommand = new PidTuningCommand(testMotorSubsystem);
+    driveCommand = new DriveCommand(driveTrainSubsystem, () -> driveController.getLeftY(),() -> driveController.getRightX());
 
-    testMotorSubsystem.setDefaultCommand(pidTuningCommand);
-    //driveTrainSubsystem.setDefaultCommand(driveCommand);
+    //testMotorSubsystem.setDefaultCommand(pidTuningCommand);
+    driveTrainSubsystem.setDefaultCommand(driveCommand);
   }
 
   /**

@@ -38,8 +38,7 @@ public class DriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    wheelSpeeds = DifferentialDrive.arcadeDriveIK(Joystick.JoystickInput(xSpeed.getAsDouble()),
-        -Joystick.JoystickInput(zRotation.getAsDouble()), false);
+    wheelSpeeds = DifferentialDrive.arcadeDriveIK(Joystick.JoystickInput(xSpeed.getAsDouble()),-Joystick.JoystickInput(zRotation.getAsDouble()), false);
     subsystem.drive(wheelSpeeds.left, wheelSpeeds.right);
   }
 
